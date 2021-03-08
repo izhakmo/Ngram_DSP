@@ -28,16 +28,19 @@ public class MainRunner {
         String output_path = null;
         String combiner_or_not = null;
         String log_path = null;
+        String key = null;
 		try {
             jar_path = args[0];
             output_path = args[1];
-            combiner_or_not = (args.length > 2 && args[2].equals("yes")) ? "yes" : "no";
+            key = args[2];
+            combiner_or_not = (args.length > 3 && args[3].equals("yes")) ? "yes" : "no";
             log_path = output_path.replaceAll("s3","s3n");
             log_path = log_path.concat("logs/");
         }
 		catch (Exception e){
-		    System.out.println("please enter 3 args: jar_path, output_path");
-		    System.out.println("3.enter or no if you want combiner");
+		    System.out.println("please enter 4 args: jar_path, output_path");
+            System.out.println("3. ec2 key pair");
+            System.out.println("4. enter or no if you want combiner");
 		    System.exit(1);
         }
         HadoopJarStepConfig only_step = new HadoopJarStepConfig()
@@ -58,7 +61,7 @@ public class MainRunner {
                 .withMasterInstanceType(InstanceType.M4Large.toString())
                 .withSlaveInstanceType(InstanceType.M4Large.toString())
                 .withHadoopVersion("2.6.0")
-                .withEc2KeyName("omer_and_tzuki")
+                .withEc2KeyName(key)
                 .withPlacement(new PlacementType("us-east-1a"))
                 .withKeepJobFlowAliveWhenNoSteps(false);
 
@@ -66,7 +69,7 @@ public class MainRunner {
         Run all jobs
 		 */
         RunJobFlowRequest request = new RunJobFlowRequest()
-                .withName("omer_and_tzuki")
+                .withName(key)
                 .withInstances(instances)
                 .withSteps(onlyStep)
                 .withLogUri(log_path)

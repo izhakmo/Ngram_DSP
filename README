@@ -5,7 +5,8 @@ Ngram
 insret the args as follow:
 1. jar_path
 2. output_path (bucket)
-3. write "yes" or "no" if you want to run the program with a combiner 
+3. ec2 key pair
+4. write "yes" or "no" if you want to run the program with a combiner
 
 this product has 4 map reduce jobs
 
