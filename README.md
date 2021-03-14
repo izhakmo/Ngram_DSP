@@ -1,6 +1,7 @@
-Izhak Moalem
+# Ngram
 
-Ngram
+
+### Running instructions
 
 insret the args as follow:
 1. jar_path
@@ -8,6 +9,10 @@ insret the args as follow:
 3. ec2 key pair
 4. write "yes" or "no" if you want to run the program with a combiner
 
+## info
+N-grams are fixed size tuples of items.
+
+ Given a corpus from google Ngram, count the legal words, divide the corpus into two parts, calculate the probability of each Ngram, sort the Ngrams alphabetically, and by probability.
 this product has 4 map reduce jobs
 
 	1. job 1 maps three grams from the corpus; filter illegal three grams, and sends the sum of occurrences of each three gram in each corpus to the reducer
